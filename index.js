@@ -9,8 +9,8 @@ const port = process.env.PORT || 5000;
 app.use(
   cors({
     origin: [
-      "https://travel-guru-12cbd.web.app/",
-      "https://travel-guru-12cbd.firebaseapp.com/",
+      "https://travel-guru-12cbd.web.app",
+      "https://travel-guru-12cbd.firebaseapp.com",
     ],
   })
 );
@@ -41,9 +41,11 @@ async function run() {
     });
 
     app.get("/places/:placesId", async (req, res) => {
-      const placesId = req.params.placesId;
-      const query = { _id: new ObjectId(placesId) };
+      const placeId = req.params.placesId;
+      console.log(placeId);
+      const query = { _id: new ObjectId(placeId) };
       const result = await placeCollection.findOne(query);
+      console.log(result);
       res.send(result);
     });
 
